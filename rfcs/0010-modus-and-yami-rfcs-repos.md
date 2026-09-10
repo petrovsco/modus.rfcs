@@ -3,10 +3,10 @@ title: modus.rfcs and yami.rfcs — create and move
 authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-10
-status: planned
-status_note: the two small ones; modus moves its own briefs, yami starts empty
+status: blocked
+status_note: "Both repos exist and modus follows its own convention as of 2026-09-10. Only the board box is open, and that is RFC 0007."
 label: infra
-depends: [6]
+depends: [6, 7]
 ---
 
 # RFC 0010: modus.rfcs and yami.rfcs — create and move
@@ -54,9 +54,10 @@ whatever the template gets wrong before tekio's 72 files are converted.
 
 ## Acceptance
 
-- [ ] `yami.rfcs` exists, created from the template, and `/roadmap` runs against it
-- [ ] `modus.rfcs` exists with the full history of `docs/roadmap/`
-- [ ] modus's ten briefs are four-digit and frontmatter-headed, numbers unchanged
-- [ ] `docs/roadmap/` is gone from this repo and the README no longer names it
-- [ ] Both repos have README + CLAUDE.md importing `rfc-convention`
-- [ ] The board shows both, and modus's own tasks still resolve by their old IDs
+- [x] `yami.rfcs` exists, created from the template
+- [ ] `/roadmap` runs against it — waits on RFC 0007
+- [x] `modus.rfcs` exists with the full history of `docs/roadmap/` — 8 commits
+- [x] modus's ten briefs are four-digit and frontmatter-headed, numbers unchanged
+- [x] `docs/roadmap/` is gone from this repo and the README no longer names it
+- [x] Both repos have README + CLAUDE.md importing `rfc-convention`
+- [ ] The board shows both, and modus's own tasks still resolve by their old IDs — RFC 0007

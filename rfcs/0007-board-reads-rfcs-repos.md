@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-10
 status: planned
-status_note: "the convention exists (task 6); the board still only understands `docs/roadmap/`"
+status_note: "The critical path as of 2026-09-10: RFCs 0004, 0005, 0008 and 0010 are all blocked on this one, because every project's specs have moved and the board still reads the old docs/roadmap layout."
 label: feature
 depends: [6]
 ---

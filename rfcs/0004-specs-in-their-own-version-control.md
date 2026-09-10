@@ -3,9 +3,10 @@ title: Specifications in their own version control
 authors: [Peter Petrov]
 created: 2026-09-09
 last_updated: 2026-09-10
-status: in progress
-status_note: the mechanism is decided and the convention now lives in modus; the per-project moves are tasks 8, 9 and 10
+status: blocked
+status_note: "All four projects have a specs repo and no code repo carries docs/roadmap any more. What is left is the board, which is RFC 0007."
 label: infra
+depends: [7]
 ---
 
 # RFC 0004: Specifications in their own version control
@@ -81,8 +82,9 @@ What that costs, concretely:
 
 - [x] The mechanism is chosen and written down before any file moves
 - [x] The convention is in modus: a house rule, a template, a catalog entry
-- [ ] All four projects have a specs repo, and no code repo still carries
-      `docs/roadmap/`
+- [x] All four projects have a specs repo, and no code repo still carries
+      `docs/roadmap/` — tekio, modus and yami on 2026-09-10; lumi already had one
 - [ ] `git log` in each code repo carries no planning-only commits after the move
 - [ ] The board shows every migrated project with no per-project configuration
+      — blocked on RFC 0007, which is the only thing still open here
 - [ ] Task 1 is re-read and its brief updated to say what is left of it

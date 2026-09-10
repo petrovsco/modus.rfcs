@@ -3,10 +3,10 @@ title: "tekio — extract the specs into `tekio.rfcs`"
 authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-10
-status: planned
-status_note: the heaviest of the four migrations; nothing blocks it once task 6 is on the machine
+status: blocked
+status_note: "Done on 2026-09-10 apart from the board: 71 RFCs and the five reference docs are in petrovsco/tekio.rfcs with their history, and the code repo is clean. The last box waits on RFC 0007."
 label: infra
-depends: [6]
+depends: [6, 7]
 ---
 
 # RFC 0008: tekio — extract the specs into `tekio.rfcs`
@@ -59,9 +59,10 @@ move — with their history.
 
 ## Acceptance
 
-- [ ] `tekio.rfcs` exists, cloned beside `tekio`, with the full history of every moved file
-- [ ] 72 briefs are four-digit, frontmatter-headed, and keep their original numbers
-- [ ] `rfcs/releases.md` and the reference docs are in place; `/roadmap` lists tekio from the new repo
-- [ ] The code repo has no `docs/roadmap/` and no dangling link to it
-- [ ] Both repos import `rfc-convention`
-- [ ] The board shows tekio from `tekio.rfcs` (needs task 7 for the frontmatter parser)
+- [x] `tekio.rfcs` exists, cloned beside `tekio`, with the full history of every moved file — 195 commits
+- [x] 71 briefs (not 72 — the count included `README.md`) are four-digit, frontmatter-headed, and keep their original numbers
+- [x] `rfcs/releases.md` and the reference docs are in place
+- [ ] `/roadmap` lists tekio from the new repo — waits on RFC 0007
+- [x] The code repo has no `docs/roadmap/` and no dangling link to it — 264 links repaired, `check:docs` clean
+- [x] Both repos import `rfc-convention` — the code repo's stale `pending-work-in-roadmap` import was swapped
+- [ ] The board shows tekio from `tekio.rfcs` (needs RFC 0007 for the frontmatter parser)
