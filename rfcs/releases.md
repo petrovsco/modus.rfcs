@@ -28,3 +28,9 @@ The roadmap convention becomes the RFC convention. `/roadmap` stops reading
 specification repository instead: numbered RFCs in `rfcs/`, YAML frontmatter in
 place of bold header lines, four-digit IDs, `done/` unchanged. The old layout
 stays readable so an unmigrated project keeps working. Scope: task 6.
+
+## modus 1.4.0
+
+**Target:** when RFCs 0011 and 0012 land.
+**Status:** planned
+**Objective:** house rules and the plugin reach every session — cloud sandboxes and outside readers included — with one source of truth on GitHub.
