@@ -1,12 +1,20 @@
-# Roadmap: lumi.rfcs — align the repo that already exists
+---
+title: lumi.rfcs — align the repo that already exists
+authors: [Peter Petrov]
+created: 2026-09-10
+last_updated: 2026-09-10
+status: planned
+status_note: the repo is real and in use; it predates the convention and does not follow it yet
+label: infra
+depends: [6]
+---
 
-**Label:** infra
-**Status:** planned — the repo is real and in use; it predates the convention and does not follow it yet
+# RFC 0009: lumi.rfcs — align the repo that already exists
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-10, from the reorganisation across the petrovsco / bubolazi / shamatoff accounts. Parent decision: task 4.
-**Depends:** 006
 
-## Goal
+## Goals
 
 `bubolazi/lumi.rfcs` becomes the reference example of the convention instead of
 the one repo that invented its own version of it.
@@ -41,7 +49,7 @@ whole of the adoption so far.
   in the code repo's own CLAUDE.md, and much of it is reference that should be a
   root document here instead. Decide per section, do not bulk-move.
 
-## Explicitly not
+## Non-Goals
 
 - Touching the lumi code repos (`lumi/`, `api/`, `terminal-server/`).
 - Rewriting the specifications themselves. This is a move and a split, not an

@@ -1,12 +1,20 @@
-# Roadmap: Roadmap board — drag a card to change its target release
+---
+title: Roadmap board — drag a card to change its target release
+authors: [Peter Petrov]
+created: 2026-09-09
+last_updated: 2026-09-10
+status: blocked
+status_note: task 7 rewrites the same write path for frontmatter files; building this on the old line-writer would mean writing it twice
+label: feature
+depends: [7]
+---
 
-**Label:** feature
-**Status:** blocked — task 7 rewrites the same write path for frontmatter files; building this on the old line-writer would mean writing it twice
+# RFC 0005: Roadmap board — drag a card to change its target release
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-09, from "we need to create another task, for changing a destination version of a task".
-**Depends:** 007
 
-## Goal
+## Goals
 
 Retarget a ticket by dragging it. Group the board by release, drop a card in
 another release's column, and the board rewrites that brief's `**Release:**`
@@ -55,7 +63,7 @@ them. This brief closes that gap.
   recent commits; it never infers a release, so nothing overrides this write on
   the next scan.
 
-## Explicitly not
+## Non-Goals
 
 - **Declaring, renaming or retiring a release.** `releases.md` is furniture and
   stays a file edit — including flipping a release to `released <date>`.

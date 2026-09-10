@@ -1,12 +1,20 @@
-# Roadmap: Context guard — wrap up at turn end, not mid-run
+---
+title: Context guard — wrap up at turn end, not mid-run
+authors: [Peter Petrov]
+created: 2026-09-04
+last_updated: 2026-09-04
+status: done
+status_note: shipped as session-flow 1.3.0 on 2026-09-04 (commit 16ae258); installed on WSL and Windows for all four consumers
+label: infra
+release: session-flow 1.3.0
+---
 
-**Label:** infra
-**Status:** done — shipped as session-flow 1.3.0 on 2026-09-04 (commit 16ae258); installed on WSL and Windows for all four consumers
-**Release:** session-flow 1.3.0
+# RFC 0002: Context guard — wrap up at turn end, not mid-run
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-04, from the question whether interrupting an active run at ~180k is pointless now that Claude Code compacts instead of ending the session.
 
-## Goal
+## Goals
 
 The guard stops interrupting work mid-run. The tokens it "saves" are already
 spent when it fires, auto-compaction means the session survives anyway, and the

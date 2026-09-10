@@ -1,12 +1,20 @@
-# Roadmap: Roadmap board reads `<project>.rfcs` repositories
+---
+title: "Roadmap board reads `<project>.rfcs` repositories"
+authors: [Peter Petrov]
+created: 2026-09-10
+last_updated: 2026-09-10
+status: planned
+status_note: "the convention exists (task 6); the board still only understands `docs/roadmap/`"
+label: feature
+depends: [6]
+---
 
-**Label:** feature
-**Status:** planned — the convention exists (task 6); the board still only understands `docs/roadmap/`
+# RFC 0007: Roadmap board reads `<project>.rfcs` repositories
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-10, split out of task 4 — the board is the one tool that reads every project's plan, so it has to learn the new home first.
-**Depends:** 006
 
-## Goal
+## Goals
 
 Point the board at the projects root and have it find `*.rfcs/rfcs/` the way it
 currently finds `*/docs/roadmap/` — same cards, same IDs, same columns — while
@@ -37,7 +45,7 @@ projects that have not migrated yet keep showing up unchanged.
   rule ("no `NNNN-` prefix means not an RFC") does not exclude it. Exclude
   `0000` explicitly.
 
-## Explicitly not
+## Non-Goals
 
 - Reading specs repos over the network — that is still task 1.
 - Rendering the root-level reference docs (doctrine, design system). The board

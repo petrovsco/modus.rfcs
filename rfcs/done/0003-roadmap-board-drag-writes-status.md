@@ -1,11 +1,19 @@
-# Roadmap: Roadmap board — drag a card to write its Status line
+---
+title: Roadmap board — drag a card to write its Status line
+authors: [Peter Petrov]
+created: 2026-09-09
+last_updated: 2026-09-09
+status: done
+status_note: "shipped 2026-09-09; drag between the four open columns rewrites the **Status:** line, Done drops are refused, verified in Chromium"
+label: feature
+---
 
-**Label:** feature
-**Status:** done — shipped 2026-09-09; drag between the four open columns rewrites the **Status:** line, Done drops are refused, verified in Chromium
+# RFC 0003: Roadmap board — drag a card to write its Status line
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-09, from "can I move a card between columns, and what does it cost in tokens?" — nothing, the board is a local Python server and no model is in the loop.
 
-## Goal
+## Goals
 
 Move a ticket between columns by dragging its card, and have the board write
 that back into the brief's `**Status:**` line. The board stops being read-only

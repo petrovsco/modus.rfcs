@@ -1,7 +1,15 @@
-# Roadmap: Specifications in their own version control
+---
+title: Specifications in their own version control
+authors: [Peter Petrov]
+created: 2026-09-09
+last_updated: 2026-09-10
+status: in progress
+status_note: the mechanism is decided and the convention now lives in modus; the per-project moves are tasks 8, 9 and 10
+label: infra
+---
 
-**Label:** infra
-**Status:** in progress — the mechanism is decided and the convention now lives in modus; the per-project moves are tasks 8, 9 and 10
+# RFC 0004: Specifications in their own version control
+
 **Kickoff:** this brief is the decision record; the work is in its children.
 **Origin:** 2026-09-09, from "we'll try to put specifications in their own version control, in order to clear the application layer from project-management decisions". Decided 2026-09-10 after several sessions comparing options.
 
@@ -26,7 +34,7 @@ doctrine, design system, schema, product description — because those are
 specification too, and splitting them from the RFCs that change them would put
 the two halves in different repositories.
 
-## Goal
+## Goals
 
 Keep the roadmap — briefs, statuses, dependencies, release scope — out of the
 repository that holds the code it describes. Today every project keeps
@@ -60,7 +68,7 @@ What that costs, concretely:
 | 9 | lumi.rfcs: align the repo that already exists |
 | 10 | modus.rfcs and yami.rfcs: create and move |
 
-## Explicitly not
+## Non-Goals
 
 - Moving anything into the personal knowledge base. That repo holds knowledge
   about the person; this is project bookkeeping and stays its own thing.

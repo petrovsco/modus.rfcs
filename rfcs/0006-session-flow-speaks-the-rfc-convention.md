@@ -1,12 +1,20 @@
-# Roadmap: session-flow speaks the RFC convention
+---
+title: session-flow speaks the RFC convention
+authors: [Peter Petrov]
+created: 2026-09-10
+last_updated: 2026-09-10
+status: in progress
+status_note: the rule, the template, the command and the catalog are written; the version bump waits on the first migrated repo proving it
+label: infra
+release: session-flow 1.4.0
+---
 
-**Label:** infra
-**Status:** in progress — the rule, the template, the command and the catalog are written; the version bump waits on the first migrated repo proving it
+# RFC 0006: session-flow speaks the RFC convention
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-10, from "we want to adopt the OpenClaw RFC structure, so let's incorporate those rules within the modus repository". Parent decision: task 4.
-**Release:** session-flow 1.4.0
 
-## Goal
+## Goals
 
 Teach modus the convention before any project migrates to it, so that all four
 migrations copy one written standard rather than each inventing its own.
@@ -41,7 +49,7 @@ migrations copy one written standard rather than each inventing its own.
   option and deliberately not taken yet: the name is muscle memory and the
   command still answers "what is on the roadmap".
 
-## Explicitly not
+## Non-Goals
 
 - Migrating any project. That is tasks 8, 9 and 10.
 - Teaching the board. That is task 7.

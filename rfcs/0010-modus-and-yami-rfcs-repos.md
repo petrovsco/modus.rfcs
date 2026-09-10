@@ -1,12 +1,20 @@
-# Roadmap: modus.rfcs and yami.rfcs — create and move
+---
+title: modus.rfcs and yami.rfcs — create and move
+authors: [Peter Petrov]
+created: 2026-09-10
+last_updated: 2026-09-10
+status: planned
+status_note: the two small ones; modus moves its own briefs, yami starts empty
+label: infra
+depends: [6]
+---
 
-**Label:** infra
-**Status:** planned — the two small ones; modus moves its own briefs, yami starts empty
+# RFC 0010: modus.rfcs and yami.rfcs — create and move
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-10, the remaining two of the four projects named in the reorganisation. Parent decision: task 4.
-**Depends:** 006
 
-## Goal
+## Goals
 
 Both projects get a specs repo, and modus stops being the tool that defines a
 convention it does not follow.
@@ -15,7 +23,7 @@ convention it does not follow.
 
 `docs/roadmap/` here holds ten briefs, `done/` and `releases.md` — including
 the briefs that describe this very migration. They move to
-`shamatoff/modus.rfcs`, cloned to `Projects/modus.rfcs`, with history, and get
+`petrovsco/modus.rfcs`, cloned to `Projects/modus.rfcs`, with history, and get
 converted to frontmatter and four digits exactly as tekio's do (task 8, same
 script — write it there, reuse it here).
 
@@ -30,14 +38,14 @@ Two things are specific to modus:
 
 ## yami
 
-Nothing to extract — `shamatoff/yami` is a `CLAUDE.md` and a `README.md`. So
+Nothing to extract — `petrovsco/yami` is a `CLAUDE.md` and a `README.md`. So
 `yami.rfcs` is created empty from `configs/rfcs/`: `rfcs/0000-template.md`,
 `rfcs/done/`, `rfcs/releases.md`, a README naming the code repo, and a CLAUDE.md
 with the import line. First RFC gets ID 1. This is the cheap end-to-end test of
 the convention on a repo with no legacy at all — do yami first, and let it catch
 whatever the template gets wrong before tekio's 72 files are converted.
 
-## Explicitly not
+## Non-Goals
 
 - Moving `configs/`, `plugins/` or `tools/` out of modus. Those are the product
   of this repo, not its plan.

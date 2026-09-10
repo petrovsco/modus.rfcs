@@ -1,21 +1,29 @@
-# Roadmap: tekio — extract the specs into `tekio.rfcs`
+---
+title: "tekio — extract the specs into `tekio.rfcs`"
+authors: [Peter Petrov]
+created: 2026-09-10
+last_updated: 2026-09-10
+status: planned
+status_note: the heaviest of the four migrations; nothing blocks it once task 6 is on the machine
+label: infra
+depends: [6]
+---
 
-**Label:** infra
-**Status:** planned — the heaviest of the four migrations; nothing blocks it once task 6 is on the machine
+# RFC 0008: tekio — extract the specs into `tekio.rfcs`
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-09-10, from "as tekio has worked most with the roadmap, the extraction there will be heavier". Parent decision: task 4.
-**Depends:** 006
 
-## Goal
+## Goals
 
-`shamatoff/tekio.rfcs` holds tekio's plan and its standing reference; the code
+`petrovsco/tekio.rfcs` holds tekio's plan and its standing reference; the code
 repo holds code. Roughly 72 briefs (18 active, 54 retired) plus `doctrine.md`,
 `design-system.md`, `code-review.md`, `grounding-inventory.md` and `grounding/`
 move — with their history.
 
 ## Approach
 
-1. **Create the repo** — `gh repo create shamatoff/tekio.rfcs --private`,
+1. **Create the repo** — `gh repo create petrovsco/tekio.rfcs --private`,
    cloned to `Projects/tekio.rfcs`, beside the code repo where the board looks.
 2. **Extract with history**, never a copy:
    `git filter-repo --path docs/roadmap/ --path docs/doctrine.md --path docs/design-system.md --path docs/code-review.md --path docs/grounding-inventory.md --path docs/grounding/`
@@ -41,7 +49,7 @@ move — with their history.
 7. **Swap the CLAUDE.md import** from `pending-work-in-roadmap` to
    `rfc-convention`, in both repos.
 
-## Explicitly not
+## Non-Goals
 
 - Renumbering. tekio's IDs are in the user's head and in commit messages; 71
   stays 71, only padded.

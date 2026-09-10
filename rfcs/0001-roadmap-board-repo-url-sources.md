@@ -1,11 +1,19 @@
-# Roadmap: Roadmap board — repo-URL sources
+---
+title: Roadmap board — repo-URL sources
+authors: [Peter Petrov]
+created: 2026-08-30
+last_updated: 2026-09-10
+status: planned
+status_note: "the local-scanning POC shipped first (`tools/roadmap-board/`); remote sources not started"
+label: feature
+---
 
-**Label:** feature
-**Status:** planned — the local-scanning POC shipped first (`tools/roadmap-board/`); remote sources not started
+# RFC 0001: Roadmap board — repo-URL sources
+
 **Kickoff:** start a fresh session with this file as the brief.
 **Origin:** 2026-08-29, split out when the board POC was built — the ask was "locally as a POC, later on also with repo URL".
 
-## Goal
+## Goals
 
 Browse the same board for projects that are **not checked out locally**: point
 the board at one or more repo URLs and see their `docs/roadmap/` tasks next to
@@ -39,7 +47,7 @@ source is still what lets the board show a project on a machine where nothing
 is checked out. Re-read task 7 first — it changes the discovery code this brief
 extends.
 
-## Explicitly not
+## Non-Goals
 
 - No write path (creating/moving briefs from the browser) — separate decision.
 - No hosting the board anywhere shared; it stays a local tool for now.
