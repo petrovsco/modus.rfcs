@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
 status: in progress
-status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Two of five acceptance items pass; the rest wait on the outside world — both user-scope installs on the GitHub source, a push, and a cloud session proving the declaration works.
+status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Two of five acceptance items pass; Pushed 2026-09-11, and WSL is on the GitHub source; the rest waits on the Windows install, a push reaching it unaided, and a cloud session proving the declaration works.
 label: infra
 release: modus 1.4.0
 ---
@@ -40,6 +40,15 @@ release: modus 1.4.0
   refused that path by a settings-file guard.
 - **2026-09-11 — left for the outside world.** Both user-scope installs, the
   push, and the cloud check. Nothing is pushed in either repository.
+
+- **2026-09-11 — one of the two installs is on the GitHub source.** WSL swapped
+  over and verified: the marketplace resolves to `petrovsco/modus`, cloned into
+  the plugin cache rather than read from a working tree, and `modus@modus` 1.3.6
+  is enabled at user scope. The swap is not clean, and the README now says so:
+  `/plugin marketplace remove` **also deletes the plugin from
+  `enabledPlugins`**, and `marketplace add` rewrites the settings entry
+  **without** `autoUpdate`. Both were restored by hand. The Windows install is
+  still on the folder source, so the first acceptance item stays open.
 
 ## Summary
 
@@ -110,8 +119,11 @@ one, is the lean option.
   outside managed settings?** The docs describe that field for administrators
   in managed settings only, and say a third-party marketplace has auto-update
   off by default. So the committed settings file omits it and the README tells
-  each machine to toggle auto-update in `/plugin`. If the field turns out to
-  work in a user or project file, the toggle becomes one more committed key.
+  each machine to toggle auto-update in `/plugin`. Still open, with one
+  observation from the 2026-09-11 swap: `claude plugin marketplace add` rewrote
+  the user-scope entry and dropped an `autoUpdate` key that was already there,
+  which says the CLI does not maintain the field — not that the runtime ignores
+  it. What settles it is a push landing in a session with no manual update.
 - **Does a repo's own marketplace entry override a user-scope one of the same
   name?** The README's "hold one repo back" recovery — pin
   `extraKnownMarketplaces.modus.source` to a `ref` — assumes a project-scope
