@@ -2,9 +2,9 @@
 title: House rules travel with the repo
 authors: [Peter Petrov]
 created: 2026-09-10
-last_updated: 2026-09-10
+last_updated: 2026-09-11
 status: in progress
-status_note: Mechanism landed in `modus` 2026-09-10 (2e70fb6); twelve repos plus the lumi workspace wrapper migrated 2026-09-11, one commit each, nothing pushed. Four of six acceptance items pass. What is left needs the outside world — the cloud-session check, and the 1.4.0 release, which ships with RFC 0012.
+status_note: Mechanism landed in `modus` 2026-09-10 (2e70fb6); twelve repos plus the lumi workspace wrapper migrated 2026-09-11, one commit each, all pushed. `modus 1.4.0` released 2026-09-11. Five of six acceptance items pass; what is left is the cloud-session check, which needs a live sandbox rather than any work in a repository.
 label: infra
 release: modus 1.4.0
 ---
@@ -100,7 +100,7 @@ path scoping, and listed as carried into cloud sessions as part of the clone.
 - [x] Every repo that imported rules is migrated: no `@~/.claude/modus/rules/` line remains anywhere  *(twelve repos plus the lumi workspace wrapper, one commit each, 2026-09-11)*
 - [ ] A cloud session on one migrated public repo quotes a house rule when asked
 - [x] A local session shows each rule once in its context, not twice  *(imports removed in the same commit that added the file, so no repo ever carries both)*
-- [ ] modus 1.4.0 released per the release rule
+- [x] modus 1.4.0 released per the release rule  *(2026-09-11, on the owner's call; plugin version bumped and `releases.md` marked released)*
 
 ## Unresolved questions
 

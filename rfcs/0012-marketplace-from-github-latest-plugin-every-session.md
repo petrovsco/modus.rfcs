@@ -50,6 +50,12 @@ release: modus 1.4.0
   **without** `autoUpdate`. Both were restored by hand. The Windows install is
   still on the folder source, so the first acceptance item stays open.
 
+- **2026-09-11 — `modus 1.4.0` released**, on the owner's call, with two
+  acceptance items here still unverified. Deliberate and recorded in
+  `releases.md`: the remaining checks need a second machine and a cloud
+  sandbox, and the second machine has nothing to pull until the release is
+  out. Plugin version 1.3.6 → 1.4.0.
+
 ## Summary
 
 The modus marketplace is registered from its GitHub repository instead of a

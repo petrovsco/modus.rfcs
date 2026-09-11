@@ -32,5 +32,17 @@ stays readable so an unmigrated project keeps working. Scope: task 6.
 ## modus 1.4.0
 
 **Target:** when RFCs 0011 and 0012 land.
-**Status:** planned
+**Status:** released 2026-09-11
 **Objective:** house rules and the plugin reach every session — cloud sandboxes and outside readers included — with one source of truth on GitHub.
+
+Shipped: house rules as committed `.claude/rules/modus/` copies refreshed by the
+SessionStart hook, with twelve repos migrated off the import lines (RFC 0011);
+the marketplace sourced from `petrovsco/modus` rather than a folder, `/modus:init`
+writing a committed `.claude/settings.json`, and a five-line recovery for a bad
+auto-update (RFC 0012). Scope: RFCs 0011 and 0012.
+
+**Called while two acceptance items are still unverified** — a cloud session
+reading a migrated repo, and the second machine on the GitHub source. Both are
+checks on a live environment rather than work in the repository, and the release
+had to go out first for the second machine to have anything to pull. They are
+tracked in their RFCs, which stay `in progress` until they pass.
