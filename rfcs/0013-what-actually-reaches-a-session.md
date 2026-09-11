@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-11
 last_updated: 2026-09-11
 status: planned
-status_note: Split out of RFC 0012, which delivered one source of the plugin but left two delivery questions unanswered — whether an interactive session start auto-updates at all, and why a cloud session installs nothing from a committed declaration. One half is a cheap local test; the other may resolve upstream without any work here.
+status_note: Split out of RFC 0012. The README now states the real delivery path — push then an explicit plugin update — on measurements rather than on the docs' description (1.4.3). One of four acceptance items passes. What is left: the interactive-session-start observation, which costs nothing and happens by itself, and the cloud paragraph that follows from it.
 label: infra
 depends: [12]
 ---
@@ -15,6 +15,27 @@ depends: [12]
 **Origin:** 2026-09-11 — RFC 0012 moved the marketplace to GitHub on the premise
 that "pushing is the delivery". Two tests that afternoon showed the premise is
 at best unproven and in the cloud simply false.
+
+## Progress
+
+- **2026-09-11, 21:14 — nothing has updated itself, and the flag has been on
+  all along.** Installed plugin 1.3.6, last touched 15:36 when it was installed
+  by hand. Marketplace catalog last refreshed 17:29 — a manual refresh — and it
+  has not picked up commits pushed since. `autoUpdate: true` in the registry
+  throughout. So across roughly four hours and two non-interactive session
+  starts, no automatic refresh of either kind occurred. **The one case still
+  untested is an interactive session start**, which is plausibly different: a
+  tool may deliberately skip auto-update in non-interactive mode so that
+  scripted runs do not shift underneath themselves. That test needs no effort
+  from anyone — the next interactive session in this repo reads the version at
+  its start.
+- **2026-09-11 — the README now states the conservative truth (1.4.3).** The
+  "Changing things" procedure says push *then*
+  `claude plugin update <plugin>@modus`, and says plainly that the push is not
+  the whole delivery, with the measurements behind it. This is correct whether
+  or not the interactive case turns out to auto-update: an explicit update is
+  never wrong, and an unproven promise is. If the interactive test comes back
+  positive, the README gains a sentence — it does not lose one.
 
 ## Summary
 
@@ -107,7 +128,7 @@ install, which is not code this repo owns.
 ## Acceptance
 
 - [ ] The local delivery question is answered by observation: `claude plugin list` at a fresh interactive session start, against a version known to be newer upstream
-- [ ] The README's "Changing things" procedure states the real delivery path, including a manual update step if one is needed
+- [x] The README's "Changing things" procedure states the real delivery path, including a manual update step if one is needed  *(1.4.3, 2026-09-11 — stated conservatively, on measurements rather than on the docs' description)*
 - [ ] The cloud behaviour is recorded in one paragraph, with the date it was last checked
 - [ ] The standing guidance — commit what a cloud session must have — is written where a reader of this repo will meet it
 
