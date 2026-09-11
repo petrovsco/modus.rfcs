@@ -3,8 +3,8 @@ title: "Marketplace from GitHub: the latest plugin in every session"
 authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
-status: in progress
-status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Pushed 2026-09-11 and shipped in `modus 1.4.0`; WSL is on the GitHub source. Two of five acceptance items pass. The Windows premise was dropped as unreal (it is dormant, and was never a separate source). The cloud question is answered and negative: a cloud session installs no plugin from committed settings, so the third goal is not met and the README no longer claims it. One live question left — whether an interactive session start auto-updates at all; the machine is parked a version behind to answer it.
+status: done
+status_note: Shipped in `modus 1.4.0`, 2026-09-11, on two of three goals. Landed: the marketplace sourced from `petrovsco/modus`, `/modus:init` and every repo declaring plugins in committed `.claude/settings.json`, the version-pin question answered, and a five-line recovery. Not landed: cloud sessions getting hooks and commands — a cloud session installs nothing from the declaration, which is not reachable from the repo side. That and the unproven local delivery path moved to RFC 0013 rather than holding this open against an upstream behaviour nobody here controls.
 label: infra
 release: modus 1.4.0
 ---
@@ -170,9 +170,10 @@ one, is the lean option.
 
 ## Acceptance
 
-- [ ] Every install in use takes the plugin from the GitHub source with auto-update on
-- [ ] A push to modus reaches a fresh session with no manual step
-- [~] One repo's committed `.claude/settings.json` declares marketplace and plugins — **done** (1318a91); a cloud session on it shows the plugin loaded — **failed 2026-09-11**, nothing installed, hook never ran
+- [x] Every install in use takes the plugin from the GitHub source with auto-update on  *(WSL, 2026-09-11; the Windows install was checked and found dormant since 2026-08-25, and was never a separate source)*
+- [→] A push to modus reaches a fresh session with no manual step — **unproven, moved to RFC 0013**: two non-interactive sessions refreshed nothing, and the interactive case is parked as a live test
+- [x] One repo's committed `.claude/settings.json` declares marketplace and plugins  *(1318a91)*
+- [→] A cloud session on it shows the plugin loaded — **failed 2026-09-11**: nothing installed, nothing synced, hook never ran. Not reachable from the repo side; moved to RFC 0013 as a watch item
 - [x] The recovery for a bad update is written in the README, five lines or fewer — aa477fd
 - [x] `/modus:init` writes committed settings, not local — aa477fd (catalog entries and the README passage in the same commit)
 
@@ -208,3 +209,16 @@ one, is the lean option.
   marketplace install copies only the plugin directory into
   `~/.claude/plugins/cache/`), which is why `/modus:init` falls back to reading
   the catalog over https rather than walking up from the plugin root.
+
+## Outcome
+
+Closed 2026-09-11 having delivered its first two goals and not its third. One
+source of the plugin: done. A change reaching sessions by being pushed:
+declared correctly, never observed working unattended. Cloud sessions getting
+hooks and commands: does not happen, and the declaration is not what is
+missing. Both open threads continue in RFC 0013.
+
+The finding worth carrying forward is the one this RFC did not set out to make:
+**what a session reliably gets is what is committed in the repo it opens.**
+Rules work in a cloud sandbox because RFC 0011 made them files. Plugins do not,
+because they are an install. Anything a session must have should be a file.
