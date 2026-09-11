@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
 status: in progress
-status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Pushed 2026-09-11 and shipped in `modus 1.4.0`; WSL is on the GitHub source. Two of five acceptance items pass. The Windows premise was dropped as unreal (it is dormant, and was never a separate source). What is left is two live questions: whether an interactive session start auto-updates at all — the machine is parked one version behind to answer it — and whether a cloud session installs the plugin from committed settings.
+status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Pushed 2026-09-11 and shipped in `modus 1.4.0`; WSL is on the GitHub source. Two of five acceptance items pass. The Windows premise was dropped as unreal (it is dormant, and was never a separate source). The cloud question is answered and negative: a cloud session installs no plugin from committed settings, so the third goal is not met and the README no longer claims it. One live question left — whether an interactive session start auto-updates at all; the machine is parked a version behind to answer it.
 label: infra
 release: modus 1.4.0
 ---
@@ -99,6 +99,20 @@ release: modus 1.4.0
   machine is parked at 1.3.6 against a pushed 1.4.1, so the next interactive
   start is a free, decisive test. Updating by hand would have destroyed it.
 
+- **2026-09-11 — the cloud plugin question is answered, and the answer is no.**
+  A cloud session on a repo whose committed `.claude/settings.json` declares
+  the marketplace and `enabledPlugins` **installed nothing**: its plugin list
+  was empty, `installed_plugins.json` held `{"version": 2, "plugins": {}}`, its
+  `plugins/synced/<id>/` directory was empty, and no modus skill appeared in
+  the session's skill list. The SessionStart hook never ran either, being part
+  of the plugin. The declaration itself was present and readable — the session
+  quoted it — so the repo side is correct and the install step simply did not
+  happen in that environment. **What did work: the committed house rules**,
+  loaded as ordinary project instructions, needing no plugin at all. That is
+  RFC 0011's mechanism confirmed a second time, and the sharpest argument for
+  why 0011 was built the way it was: had the rules depended on the plugin, a
+  cloud session would have had neither.
+
 ## Summary
 
 The modus marketplace is registered from its GitHub repository instead of a
@@ -158,7 +172,7 @@ one, is the lean option.
 
 - [ ] Every install in use takes the plugin from the GitHub source with auto-update on
 - [ ] A push to modus reaches a fresh session with no manual step
-- [ ] One repo's committed `.claude/settings.json` declares marketplace and plugins; a cloud session on it shows the plugin loaded (the session-start hook fired)
+- [~] One repo's committed `.claude/settings.json` declares marketplace and plugins — **done** (1318a91); a cloud session on it shows the plugin loaded — **failed 2026-09-11**, nothing installed, hook never ran
 - [x] The recovery for a bad update is written in the README, five lines or fewer — aa477fd
 - [x] `/modus:init` writes committed settings, not local — aa477fd (catalog entries and the README passage in the same commit)
 
@@ -179,15 +193,16 @@ one, is the lean option.
   `extraKnownMarketplaces.modus.source` to a `ref` — assumes a project-scope
   entry wins over the user-scope `modus` entry, which follows from settings
   precedence but was not exercised.
-- **Will a cloud session install these plugins without a manual step?** Still
-  open after the 2026-09-11 cloud run, which tested the rules and not the
-  plugin. One question to a cloud session on this repo settles it: *are the
-  modus slash commands available to you?* The docs
-  say a plugin that only a project's `.claude/settings.json` enables, and that
-  comes from an *external* source, does not load until someone runs
-  `claude plugin install`. The modus entries use marketplace-relative sources
-  (`./plugins/modus`), which should not count as external — the third
-  acceptance item is what proves it.
+- **Answered 2026-09-11: a cloud session does not install these plugins.**
+  Nothing installed, nothing synced, no hook. The guess that
+  marketplace-relative sources (`./plugins/modus`) would escape the docs'
+  "external source needs a manual install" caveat was wrong, or the sync does
+  not run there at all — the session could not tell which, and from outside
+  neither can we. **What this leaves undecided is scope, not fact:** the third
+  goal of this RFC ("cloud sessions get the hooks and commands, not only the
+  rules") is not reachable from the repo side today, and may not be reachable
+  at all without an upstream change. Whether that reopens this RFC, becomes a
+  follow-up, or is simply accepted as a limitation is the owner's call.
 - **Denied, and settled another way.** Listing `~/.claude/plugins/` to see the
   install layout was refused; the documentation answered it instead (a
   marketplace install copies only the plugin directory into
