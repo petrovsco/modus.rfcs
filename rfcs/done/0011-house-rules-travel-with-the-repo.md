@@ -3,8 +3,8 @@ title: House rules travel with the repo
 authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
-status: in progress
-status_note: Mechanism landed in `modus` 2026-09-10 (2e70fb6); twelve repos plus the lumi workspace wrapper migrated 2026-09-11, one commit each, all pushed. `modus 1.4.0` released 2026-09-11. Five of six acceptance items pass; what is left is the cloud-session check, which needs a live sandbox rather than any work in a repository.
+status: done
+status_note: Shipped in `modus 1.4.0`, 2026-09-11. All six acceptance items pass: the mechanism (2e70fb6), twelve repos plus the lumi workspace wrapper migrated one commit each, and a cloud session on a migrated public repo quoting a rule verbatim — the reader this RFC was written for, confirmed live.
 label: infra
 release: modus 1.4.0
 ---
@@ -98,7 +98,7 @@ path scoping, and listed as carried into cloud sessions as part of the clone.
 - [x] `sync-rules.mjs` refreshes `<cwd>/.claude/rules/modus/*.md`, adds nothing on its own, and marks retired rules instead of deleting them  *(2e70fb6)*
 - [x] `/modus:init` writes and removes rule files there; every `rule` entry's install steps in the catalog say so  *(2e70fb6)*
 - [x] Every repo that imported rules is migrated: no `@~/.claude/modus/rules/` line remains anywhere  *(twelve repos plus the lumi workspace wrapper, one commit each, 2026-09-11)*
-- [ ] A cloud session on one migrated public repo quotes a house rule when asked
+- [x] A cloud session on one migrated public repo quotes a house rule when asked  *(2026-09-11, cloud session on `modus` itself: named both rules and their folder, and quoted `no-personal-context`'s opening line verbatim — bold markup included — which a paraphrase from context could not have produced)*
 - [x] A local session shows each rule once in its context, not twice  *(imports removed in the same commit that added the file, so no repo ever carries both)*
 - [x] modus 1.4.0 released per the release rule  *(2026-09-11, on the owner's call; plugin version bumped and `releases.md` marked released)*
 

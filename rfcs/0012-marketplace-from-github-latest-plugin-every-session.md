@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
 status: in progress
-status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Two of five acceptance items pass; Pushed 2026-09-11, and WSL is on the GitHub source; the rest waits on the Windows install, a push reaching it unaided, and a cloud session proving the declaration works.
+status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Pushed 2026-09-11 and shipped in `modus 1.4.0`; WSL is on the GitHub source. Two of five acceptance items pass. The rest waits on the Windows install, a push reaching it unaided, and one unasked question to a cloud session — whether the committed settings file actually installs the plugin there.
 label: infra
 release: modus 1.4.0
 ---
@@ -55,6 +55,14 @@ release: modus 1.4.0
   `releases.md`: the remaining checks need a second machine and a cloud
   sandbox, and the second machine has nothing to pull until the release is
   out. Plugin version 1.3.6 → 1.4.0.
+
+- **2026-09-11 — the cloud check ran, and answered RFC 0011's half of it only.**
+  A cloud session on `modus` itself named both committed rules and quoted one
+  verbatim, so the rules reach a sandbox. **The plugin half was not tested** —
+  the session was not asked whether `/modus:init` was available to it, so
+  whether a repo's committed `.claude/settings.json` actually installs the
+  plugin at cloud-session start remains unknown. That is the open half of the
+  third acceptance item, and the question below it.
 
 ## Summary
 
@@ -135,7 +143,10 @@ one, is the lean option.
   `extraKnownMarketplaces.modus.source` to a `ref` — assumes a project-scope
   entry wins over the user-scope `modus` entry, which follows from settings
   precedence but was not exercised.
-- **Will a cloud session install these plugins without a manual step?** The docs
+- **Will a cloud session install these plugins without a manual step?** Still
+  open after the 2026-09-11 cloud run, which tested the rules and not the
+  plugin. One question to a cloud session on this repo settles it: *are the
+  modus slash commands available to you?* The docs
   say a plugin that only a project's `.claude/settings.json` enables, and that
   comes from an *external* source, does not load until someone runs
   `claude plugin install`. The modus entries use marketplace-relative sources
