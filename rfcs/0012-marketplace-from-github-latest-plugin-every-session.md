@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
 status: in progress
-status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. Two of five acceptance items pass; the rest wait on the owner — both user-scope installs, a push, and the modus repo's own `.claude/settings.json`, which this session was not permitted to write.
+status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Two of five acceptance items pass; the rest wait on the outside world — both user-scope installs on the GitHub source, a push, and a cloud session proving the declaration works.
 label: infra
 release: modus 1.4.0
 ---
@@ -33,9 +33,13 @@ release: modus 1.4.0
   over https, else ask — and step 3 writes the committed `.claude/settings.json`
   carrying `extraKnownMarketplaces` plus `enabledPlugins`. Both plugin entries
   in `catalog.json` say the same. `modus` 1.3.5 → 1.3.6.
-- **2026-09-11 — left for the owner.** Both user-scope installs, the push, the
-  cloud check, and the modus repo's own committed settings file (see Unresolved
-  questions).
+- **2026-09-11 — this repo's own committed settings (1318a91).**
+  `extraKnownMarketplaces.modus.source` pointing at `petrovsco/modus`, plus
+  `enabledPlugins`. `autoUpdate` deliberately omitted while the question below
+  is open. Written outside the working session: the one that did the rest was
+  refused that path by a settings-file guard.
+- **2026-09-11 — left for the outside world.** Both user-scope installs, the
+  push, and the cloud check. Nothing is pushed in either repository.
 
 ## Summary
 
@@ -102,14 +106,6 @@ one, is the lean option.
 
 ## Unresolved questions
 
-- **The modus repo's own `.claude/settings.json` was not written.** The session
-  of 2026-09-11 was refused permission to write that path (a settings-file
-  guard; nothing to do with the repo), so the first half of the third
-  acceptance item is still open. The file is two keys and no judgement:
-  `extraKnownMarketplaces.modus.source` = `{"source": "github", "repo":
-  "petrovsco/modus"}`, and `enabledPlugins` = `{"modus@modus": true}`.
-  `.gitignore` was checked: `*.local.json` is ignored, `.claude/settings.json`
-  is not.
 - **Is `"autoUpdate": true` honoured on an `extraKnownMarketplaces` entry
   outside managed settings?** The docs describe that field for administrators
   in managed settings only, and say a third-party marketplace has auto-update
