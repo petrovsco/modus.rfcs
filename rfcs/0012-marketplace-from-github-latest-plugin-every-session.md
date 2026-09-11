@@ -4,7 +4,7 @@ authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-11
 status: in progress
-status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Pushed 2026-09-11 and shipped in `modus 1.4.0`; WSL is on the GitHub source. Two of five acceptance items pass. The rest waits on the Windows install, a push reaching it unaided, and one unasked question to a cloud session — whether the committed settings file actually installs the plugin there.
+status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. This repo's own committed `.claude/settings.json` followed in 1318a91. Pushed 2026-09-11 and shipped in `modus 1.4.0`; WSL is on the GitHub source. Two of five acceptance items pass. The Windows premise was dropped as unreal (it is dormant, and was never a separate source). What is left is two live questions: whether an interactive session start auto-updates at all — the machine is parked one version behind to answer it — and whether a cloud session installs the plugin from committed settings.
 label: infra
 release: modus 1.4.0
 ---
@@ -64,6 +64,41 @@ release: modus 1.4.0
   plugin at cloud-session start remains unknown. That is the open half of the
   third acceptance item, and the question below it.
 
+- **2026-09-11 — the "both installs" premise was checked and dropped.** A Windows
+  install exists but has been idle since 2026-08-25 (settings last touched
+  2026-08-29, every session record under the superseded `topal` account path),
+  while WSL is in daily use. **And the two were never separate sources:**
+  `C:\Users\peter\Projects\modus` and `/mnt/c/Users/peter/Projects/modus` are
+  one folder spelled two ways, so they could not diverge on content — only on
+  which cached plugin version each had pulled. The motivation's "the two installs
+  can drift apart" was therefore the weakest of its three arguments; the other
+  two — a machine that is not this one, and a cloud sandbox with no folder at
+  all — are untouched and remain the reason for this RFC. The first two
+  acceptance items were rewritten from "both installs" to "every install in use",
+  on the owner's call. Reviving Windows means the three-command switch in the
+  README's *Switching a machine that already had the folder source*.
+
+- **2026-09-11 — the delivery test ran, and a push does *not* reach a fresh
+  session on its own.** Test payload: a real documentation fix plus
+  `modus 1.4.0 → 1.4.1`, pushed (1371812), with the installed plugin sitting at
+  1.3.6. Four observations, in order:
+  1. `autoUpdate: true` written into the user-scope `extraKnownMarketplaces`
+     entry **does** reach `known_marketplaces.json`, so the settings field is
+     not ignored — it feeds the registry that drives the behaviour.
+  2. A fresh non-interactive session (`claude -p`) started with that flag on
+     refreshed **nothing**: same installed version, same marketplace commit,
+     same `lastUpdated` timestamp.
+  3. `claude plugin marketplace update modus` moved the marketplace clone to
+     the new commit — but left the **installed plugin at 1.3.6**. Refreshing
+     the catalog and updating a plugin are two separate steps, and the README's
+     "the push is the whole delivery" elides that.
+  4. A second fresh `-p` session, now with a current catalog showing 1.4.1,
+     still did not update.
+  **Untested and the one thing that would settle it:** whether an *interactive*
+  session start does what `-p` does not. Deliberately left in that state — the
+  machine is parked at 1.3.6 against a pushed 1.4.1, so the next interactive
+  start is a free, decisive test. Updating by hand would have destroyed it.
+
 ## Summary
 
 The modus marketplace is registered from its GitHub repository instead of a
@@ -121,23 +156,24 @@ one, is the lean option.
 
 ## Acceptance
 
-- [ ] Both local installs use the GitHub source with auto-update; the plugin list shows the same versions on WSL and Windows
-- [ ] A push to modus reaches a fresh session on the other install with no manual step
+- [ ] Every install in use takes the plugin from the GitHub source with auto-update on
+- [ ] A push to modus reaches a fresh session with no manual step
 - [ ] One repo's committed `.claude/settings.json` declares marketplace and plugins; a cloud session on it shows the plugin loaded (the session-start hook fired)
 - [x] The recovery for a bad update is written in the README, five lines or fewer — aa477fd
 - [x] `/modus:init` writes committed settings, not local — aa477fd (catalog entries and the README passage in the same commit)
 
 ## Unresolved questions
 
-- **Is `"autoUpdate": true` honoured on an `extraKnownMarketplaces` entry
-  outside managed settings?** The docs describe that field for administrators
-  in managed settings only, and say a third-party marketplace has auto-update
-  off by default. So the committed settings file omits it and the README tells
-  each machine to toggle auto-update in `/plugin`. Still open, with one
-  observation from the 2026-09-11 swap: `claude plugin marketplace add` rewrote
-  the user-scope entry and dropped an `autoUpdate` key that was already there,
-  which says the CLI does not maintain the field — not that the runtime ignores
-  it. What settles it is a push landing in a session with no manual update.
+- **Does auto-update ever fire without a manual step?** Partly answered
+  2026-09-11, and the answer so far is no. The settings field is honoured as
+  far as the registry, but two fresh `-p` sessions refreshed nothing, and a
+  manual marketplace refresh updates the catalog without touching the installed
+  plugin. What remains is whether an interactive session start behaves
+  differently; the machine is parked one version behind on purpose so the next
+  one answers it. If interactive sessions also do nothing, the README's
+  "the push is the whole delivery" is wrong and this RFC needs a step that
+  runs `claude plugin update` — which is a smaller promise than the one made
+  here, and worth saying out loud rather than quietly tolerating.
 - **Does a repo's own marketplace entry override a user-scope one of the same
   name?** The README's "hold one repo back" recovery — pin
   `extraKnownMarketplaces.modus.source` to a `ref` — assumes a project-scope
