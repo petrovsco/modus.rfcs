@@ -2,9 +2,9 @@
 title: "Marketplace from GitHub: the latest plugin in every session"
 authors: [Peter Petrov]
 created: 2026-09-10
-last_updated: 2026-09-10
-status: planned
-status_note: Kickoff-ready. One open check at kickoff — whether an enabled plugin can be pinned to a version — decides the shape of the safeguard, not whether to proceed.
+last_updated: 2026-09-11
+status: in progress
+status_note: Repo half landed 2026-09-11 (aa477fd) — the version-pin question is answered, the README carries the one-command bootstrap and the recovery, and `/modus:init` plus the catalog now write committed settings. Two of five acceptance items pass; the rest wait on the owner — both user-scope installs, a push, and the modus repo's own `.claude/settings.json`, which this session was not permitted to write.
 label: infra
 release: modus 1.4.0
 ---
@@ -13,6 +13,29 @@ release: modus 1.4.0
 
 **Kickoff:** start a fresh session in the modus repo with this file as the brief.
 **Origin:** 2026-09-10 — "every next session should have the latest modus plugin available, with some safeguards — not too tight, to save gas".
+
+## Progress log
+
+- **2026-09-11 — the version-pin check, answered from the plugin documentation.**
+  A repo cannot pin an enabled plugin to a version. `enabledPlugins` takes
+  `true`/`false` and nothing else, and `claude plugin install`, `update` and
+  `marketplace add` expose no version argument. Version pins are
+  producer-side: a plugin entry's `ref`/`sha` inside `marketplace.json`, or the
+  manifest's `version`. The one consumer-side hold-back is a **marketplace**
+  source's `ref` — a branch or tag, never a sha — which freezes the whole
+  marketplace for one repo. So the README's recovery is revert-the-push plus
+  restart, with the `ref` pin named as the way to hold a single repo back.
+- **2026-09-11 — the repo half landed (aa477fd).** README: bootstrap is one
+  command against `petrovsco/modus` (the clone URL still named the previous
+  GitHub owner; corrected), auto-update named as what actually delivers a push,
+  and the five-line recovery section. `/modus:init`: step 0 no longer needs a
+  clone — plugin root, else the catalog straight from the repository of record
+  over https, else ask — and step 3 writes the committed `.claude/settings.json`
+  carrying `extraKnownMarketplaces` plus `enabledPlugins`. Both plugin entries
+  in `catalog.json` say the same. `modus` 1.3.5 → 1.3.6.
+- **2026-09-11 — left for the owner.** Both user-scope installs, the push, the
+  cloud check, and the modus repo's own committed settings file (see Unresolved
+  questions).
 
 ## Summary
 
@@ -74,9 +97,38 @@ one, is the lean option.
 - [ ] Both local installs use the GitHub source with auto-update; the plugin list shows the same versions on WSL and Windows
 - [ ] A push to modus reaches a fresh session on the other install with no manual step
 - [ ] One repo's committed `.claude/settings.json` declares marketplace and plugins; a cloud session on it shows the plugin loaded (the session-start hook fired)
-- [ ] The recovery for a bad update is written in the README, five lines or fewer
-- [ ] `/modus:init` writes committed settings, not local
+- [x] The recovery for a bad update is written in the README, five lines or fewer — aa477fd
+- [x] `/modus:init` writes committed settings, not local — aa477fd (catalog entries and the README passage in the same commit)
 
 ## Unresolved questions
 
-None — the version-pin check is the first step of the work, not a blocker.
+- **The modus repo's own `.claude/settings.json` was not written.** The session
+  of 2026-09-11 was refused permission to write that path (a settings-file
+  guard; nothing to do with the repo), so the first half of the third
+  acceptance item is still open. The file is two keys and no judgement:
+  `extraKnownMarketplaces.modus.source` = `{"source": "github", "repo":
+  "petrovsco/modus"}`, and `enabledPlugins` = `{"modus@modus": true}`.
+  `.gitignore` was checked: `*.local.json` is ignored, `.claude/settings.json`
+  is not.
+- **Is `"autoUpdate": true` honoured on an `extraKnownMarketplaces` entry
+  outside managed settings?** The docs describe that field for administrators
+  in managed settings only, and say a third-party marketplace has auto-update
+  off by default. So the committed settings file omits it and the README tells
+  each machine to toggle auto-update in `/plugin`. If the field turns out to
+  work in a user or project file, the toggle becomes one more committed key.
+- **Does a repo's own marketplace entry override a user-scope one of the same
+  name?** The README's "hold one repo back" recovery — pin
+  `extraKnownMarketplaces.modus.source` to a `ref` — assumes a project-scope
+  entry wins over the user-scope `modus` entry, which follows from settings
+  precedence but was not exercised.
+- **Will a cloud session install these plugins without a manual step?** The docs
+  say a plugin that only a project's `.claude/settings.json` enables, and that
+  comes from an *external* source, does not load until someone runs
+  `claude plugin install`. The modus entries use marketplace-relative sources
+  (`./plugins/modus`), which should not count as external — the third
+  acceptance item is what proves it.
+- **Denied, and settled another way.** Listing `~/.claude/plugins/` to see the
+  install layout was refused; the documentation answered it instead (a
+  marketplace install copies only the plugin directory into
+  `~/.claude/plugins/cache/`), which is why `/modus:init` falls back to reading
+  the catalog over https rather than walking up from the plugin root.
