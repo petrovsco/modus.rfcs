@@ -2,8 +2,10 @@
 
 ## House rules
 
-@~/.claude/modus/rules/rfc-convention.md
-@~/.claude/modus/rules/no-personal-context.md
+The rules in [`.claude/rules/modus/`](.claude/rules/modus/) are loaded automatically
+wherever this repo is checked out — a cloud session, a collaborator's machine, a
+machine with no modus installed. They are managed by modus: edit a rule in the
+modus repo, not here.
 
 ## What this repo is
 
