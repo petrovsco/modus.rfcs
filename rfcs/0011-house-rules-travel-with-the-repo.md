@@ -3,8 +3,8 @@ title: House rules travel with the repo
 authors: [Peter Petrov]
 created: 2026-09-10
 last_updated: 2026-09-10
-status: planned
-status_note: Kickoff-ready. Mechanism change; ships as modus 1.4.0 together with RFC 0012.
+status: in progress
+status_note: Mechanism landed in `modus` 2026-09-10 (2e70fb6); twelve repos plus the lumi workspace wrapper migrated 2026-09-11, one commit each, nothing pushed. Four of six acceptance items pass. What is left needs the outside world — the cloud-session check, and the 1.4.0 release, which ships with RFC 0012.
 label: infra
 release: modus 1.4.0
 ---
@@ -95,13 +95,23 @@ path scoping, and listed as carried into cloud sessions as part of the clone.
 
 ## Acceptance
 
-- [ ] `sync-rules.mjs` refreshes `<cwd>/.claude/rules/modus/*.md`, adds nothing on its own, and marks retired rules instead of deleting them
-- [ ] `/modus:init` writes and removes rule files there; every `rule` entry's install steps in the catalog say so
-- [ ] Every repo that imported rules is migrated: no `@~/.claude/modus/rules/` line remains anywhere
+- [x] `sync-rules.mjs` refreshes `<cwd>/.claude/rules/modus/*.md`, adds nothing on its own, and marks retired rules instead of deleting them  *(2e70fb6)*
+- [x] `/modus:init` writes and removes rule files there; every `rule` entry's install steps in the catalog say so  *(2e70fb6)*
+- [x] Every repo that imported rules is migrated: no `@~/.claude/modus/rules/` line remains anywhere  *(twelve repos plus the lumi workspace wrapper, one commit each, 2026-09-11)*
 - [ ] A cloud session on one migrated public repo quotes a house rule when asked
-- [ ] A local session shows each rule once in its context, not twice
+- [x] A local session shows each rule once in its context, not twice  *(imports removed in the same commit that added the file, so no repo ever carries both)*
 - [ ] modus 1.4.0 released per the release rule
 
 ## Unresolved questions
 
-None.
+None blocking. Two facts the migration turned up, recorded because the next
+reader will hit them:
+
+- **`lumi.rfcs` ignored `.claude/` wholesale**, so a committed rule copy could
+  never have travelled with it. Fixed in that repo (`.claude/*` with
+  `!.claude/rules/`). Any repo adopting a rule needs the same check — the
+  ignore fails silently and looks exactly like success.
+- **The `lumi-workspace` wrapper is not a git repo**, so its copies are
+  untracked. They still load for a session started there, but "travels with the
+  repo" does not apply to a folder that is not one. It is the last workspace
+  wrapper left and a flattening candidate.
